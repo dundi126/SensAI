@@ -1,9 +1,33 @@
-import React from "react";
-import Link from "next/link";
-import { Button } from "./ui/button";
+"use client";
+
+import React, { useEffect, useRef } from "react";
 import Image from "next/image";
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 const HeroSection = () => {
+	const heroRef = useRef(null);
+
+	useEffect(() => {
+		const imageElement = heroRef.current;
+
+		const handleScroll = () => {
+			const scrollPosition = window.scrollY;
+			const ScrollThreshold = 100; // Adjust this value as needed
+
+			if (scrollPosition > ScrollThreshold) {
+				imageElement.classList.add("scrolled");
+			} else {
+				imageElement.classList.remove("scrolled");
+			}
+		};
+
+		window.addEventListener("scroll", handleScroll);
+		return () => {
+			window.removeEventListener("scroll", handleScroll);
+		};
+	}, []);
+
 	return (
 		<section className="w-full pt-36 md:pt-48 pb-10">
 			<div className="space-y-6 text-center">
@@ -17,6 +41,30 @@ const HeroSection = () => {
 						Advance your career with personalized guidance, interview prep, and
 						AI-powered tools for job success.
 					</p>
+				</div>
+				<div className="flex justify-center space-x-4">
+					<Link href="/dashboard">
+						<Button size="lg" className="px-8">
+							Get Started
+						</Button>
+					</Link>
+					<Link href="/">
+						<Button size="lg" variant="outline" className="px-8">
+							Watch Demo
+						</Button>
+					</Link>
+				</div>
+				<div className="hero-image-wrapper mt-5 md:mt-0">
+					<div ref={heroRef} className="hero-image">
+						<Image
+							src="/banner.jpg"
+							width={1280}
+							height={720}
+							alt="Dashboard Preview"
+							className="rounded-lg shadow-2xl border mx-auto"
+							priority
+						/>
+					</div>
 				</div>
 			</div>
 		</section>

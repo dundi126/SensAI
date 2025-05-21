@@ -21,7 +21,7 @@ import {
 
 const PageHeader = () => {
 	return (
-		<header className="fixed top-0 w-full bg-background/80 backdrop-blur-md z-50 supports-[backdrop-filter]:bg-background/60">
+		<header className="fixed top-0 w-full h-16 bg-background/80 backdrop-blur-md z-50 supports-[backdrop-filter]:bg-background/60 border-b-2 border-b-muted/50 ">
 			<nav className="container mx-auto px-4 h-12 flex items-center justify-between">
 				<Link href="/" className="flex items-center">
 					<Image
@@ -36,7 +36,7 @@ const PageHeader = () => {
 				<div className="flex items-center gap-2 md:gap-4">
 					<SignedIn>
 						<Link href={"dashboard"}>
-							<Button variant={"outline"}>
+							<Button variant="outline">
 								<LayoutDashboard className=" h-4 w-4" />
 								<span className="hidden md:block">Industry Insights</span>
 							</Button>
