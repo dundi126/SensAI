@@ -6,10 +6,10 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 
 const HeroSection = () => {
-	const heroRef = useRef(null);
+	const imageRef = useRef(null);
 
 	useEffect(() => {
-		const imageElement = heroRef.current;
+		const imageElement = imageRef.current;
 
 		const handleScroll = () => {
 			const scrollPosition = window.scrollY;
@@ -48,14 +48,14 @@ const HeroSection = () => {
 							Get Started
 						</Button>
 					</Link>
-					<Link href="/">
+					<Link href="https://www.youtube.com/roadsidecoder">
 						<Button size="lg" variant="outline" className="px-8">
 							Watch Demo
 						</Button>
 					</Link>
 				</div>
 				<div className="hero-image-wrapper mt-5 md:mt-0">
-					<div ref={heroRef} className="hero-image">
+					<div ref={imageRef} className="hero-image">
 						<Image
 							src="/banner.jpg"
 							width={1280}

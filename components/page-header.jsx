@@ -9,6 +9,7 @@ import {
 	LayoutDashboard,
 	PenBox,
 	StarsIcon,
+	ChevronDown,
 } from "lucide-react";
 import {
 	DropdownMenu,
@@ -21,54 +22,61 @@ import {
 
 const PageHeader = () => {
 	return (
-		<header className="fixed top-0 w-full h-16 bg-background/80 backdrop-blur-md z-50 supports-[backdrop-filter]:bg-background/60 border-b-2 border-b-muted/50 ">
-			<nav className="container mx-auto px-4 h-12 flex items-center justify-between">
-				<Link href="/" className="flex items-center">
+		<header className="fixed top-0 w-full border-b bg-background/80 backdrop-blur-md z-50 supports-[backdrop-filter]:bg-background/60">
+			<nav className="container mx-auto px-4 h-16 flex items-center justify-between">
+				<Link href="/">
 					<Image
-						src="/logo.png"
-						alt="Logo"
+						src={"/logo.png"}
+						alt="Sensai Logo"
 						width={200}
 						height={60}
-						className="mr-2 h-12 w-auto object-contain"
+						className="h-12 py-1 w-auto object-contain"
 					/>
 				</Link>
 
-				<div className="flex items-center gap-2 md:gap-4">
+				{/* Action Buttons */}
+				<div className="flex items-center space-x-2 md:space-x-4">
 					<SignedIn>
-						<Link href={"dashboard"}>
-							<Button variant="outline">
-								<LayoutDashboard className=" h-4 w-4" />
-								<span className="hidden md:block">Industry Insights</span>
+						<Link href="/dashboard">
+							<Button
+								variant="outline"
+								className="hidden md:inline-flex items-center gap-2">
+								<LayoutDashboard className="h-4 w-4" />
+								Industry Insights
+							</Button>
+							<Button variant="ghost" className="md:hidden w-10 h-10 p-0">
+								<LayoutDashboard className="h-4 w-4" />
 							</Button>
 						</Link>
 
+						{/* Growth Tools Dropdown */}
 						<DropdownMenu>
-							<DropdownMenuTrigger>
-								<Button>
-									<StarsIcon className=" h-4 w-4" />
-									<span className="hidden md:block"> Growth Tools</span>
+							<DropdownMenuTrigger asChild>
+								<Button className="flex items-center gap-2">
+									<StarsIcon className="h-4 w-4" />
+									<span className="hidden md:block">Growth Tools</span>
+									<ChevronDown className="h-4 w-4" />
 								</Button>
 							</DropdownMenuTrigger>
-							<DropdownMenuContent>
-								<DropdownMenuLabel>
-									<Link href={"/resume"} className="flex items-center gap-2">
-										<FileText className=" h-4 w-4" />
-										<span className="hidden md:block"> Resume Builder</span>
-									</Link>
-								</DropdownMenuLabel>
-								<DropdownMenuSeparator />
-								<DropdownMenuItem>
-									<Link
-										href={"/ai-cover-letter"}
-										className="flex items-center gap-2">
-										<PenBox className=" h-4 w-4" />
-										<span className="hidden md:block"> Cover Letter</span>
+							<DropdownMenuContent align="end" className="w-48">
+								<DropdownMenuItem asChild>
+									<Link href="/resume" className="flex items-center gap-2">
+										<FileText className="h-4 w-4" />
+										Build Resume
 									</Link>
 								</DropdownMenuItem>
-								<DropdownMenuItem>
-									<Link href={"/interview"} className="flex items-center gap-2">
-										<GraduationCap className=" h-4 w-4" />
-										<span className="hidden md:block"> Interview Prep</span>
+								<DropdownMenuItem asChild>
+									<Link
+										href="/ai-cover-letter"
+										className="flex items-center gap-2">
+										<PenBox className="h-4 w-4" />
+										Cover Letter
+									</Link>
+								</DropdownMenuItem>
+								<DropdownMenuItem asChild>
+									<Link href="/interview" className="flex items-center gap-2">
+										<GraduationCap className="h-4 w-4" />
+										Interview Prep
 									</Link>
 								</DropdownMenuItem>
 							</DropdownMenuContent>
@@ -77,19 +85,20 @@ const PageHeader = () => {
 
 					<SignedOut>
 						<SignInButton>
-							<Button>SignIn</Button>
+							<Button variant="outline">Sign In</Button>
 						</SignInButton>
 					</SignedOut>
+
 					<SignedIn>
 						<UserButton
 							appearance={{
 								elements: {
-									avatarBox: "h-10 w-10",
+									avatarBox: "w-10 h-10",
 									userButtonPopoverCard: "shadow-xl",
 									userPreviewMainIdentifier: "font-semibold",
 								},
-								afterLogoutUrl: "/",
 							}}
+							afterSignOutUrl="/"
 						/>
 					</SignedIn>
 				</div>
